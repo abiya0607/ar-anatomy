@@ -2,20 +2,30 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>My First WebAR Project</title>
+  <title>AR Anatomy Explorer</title>
   <!-- Load A-Frame and MindAR Libraries -->
   <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
 </head>
 <body>
-  <!-- Simple AR Scene -->
   <a-scene mindar-image="imageTargetSrc: https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.2/examples/image-tracking/assets/card-example/card.mind;" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+    
+    <a-assets>
+      <!-- This links to your 3D brain model inside the assets folder -->
+      <a-asset-item id="brainModel" src="assets/brain.glb"></a-asset-item>
+    </a-assets>
+
     <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-    <!-- This links to a default target. When scanned, a red box will appear! -->
+    <!-- When the target card is scanned, the 3D brain appears -->
     <a-entity mindar-image-target="targetIndex: 0">
-      <a-box position="0 0.4 0" material="color: red;"></a-box>
+      <a-gltf-model 
+        src="#brainModel" 
+        position="0 0 0" 
+        scale="0.8 0.8 0.8">
+      </a-gltf-model>
     </a-entity>
+    
   </a-scene>
 </body>
 </html>
